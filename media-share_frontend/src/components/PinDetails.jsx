@@ -11,6 +11,7 @@ import { client, urlFor } from '../client';
 import MasonryLayout from './MasonryLayout';
 import { pinDetailMorePinQuery, pinDetailQuery } from '../utils/fetch';
 import Spinner from './Spinner';
+import { userInfo } from '../utils/general';
 
 const PinDetail = () => {
   const [pins, setPins] = useState(null);
@@ -61,7 +62,7 @@ const PinDetail = () => {
         _key: uuidv4(),
         postedBy: {
           _type: 'postedBy',
-          _ref: pinDetails?.postedBy?._id
+          _ref: userInfo?.id
         }
       }]).commit()
       .then(() => {
@@ -132,10 +133,10 @@ const PinDetail = () => {
             }
           </div>
           <div className='flex flex-row mt-6 gap-3'>
-            <Link to={`/user-profile/${pinDetails?.postedBy?._id}`}
+            <Link to={`/user-profile/${userInfo?.id}`}
               className='flex flex-row gap-2 text-sm items-center'
             >
-              <img src={pinDetails?.postedBy?.image} alt="posted by" 
+              <img src={userInfo?.picture} alt="posted by" 
                 className='h-7 w-7 rounded-full'
               />
             </Link>
